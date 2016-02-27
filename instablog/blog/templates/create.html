@@ -1,0 +1,27 @@
+{% extends 'layout.html' %}
+{% load bootstrap3 %}
+{% block title %}Create post{% endblock %}
+{% block content %}
+		<form method="POST" action="" class="form-horizontal">
+		{% csrf_token %}
+		<div class="form-group form-group-sm">
+			<p>
+				<select name="category">
+					{% for cat in categories %}
+					<option value="{{cat.pk}}">{{cat.name}}</option>
+					{% endfor %}
+				</select>
+			</p>
+			<p>
+				<label for="title">title</label>
+				<input type="text" name="title" id="title"/>
+			</p>
+			<p>
+				<textarea name="content"></textarea>
+			</p>
+			<p>
+				{% bootstrap_button "Save" button_type="submit" button_class="btn-primary" %}
+			</p>
+		</div>
+		</form>
+{% endblock %}
