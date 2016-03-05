@@ -1,6 +1,8 @@
 from django.db import models
+from django.conf import settings
 
 class Post(models.Model):
+	user = models.ForeignKey(settings.AUTH_USER_MODEL)
 	title = models.CharField(max_length=200)
 	content = models.TextField()
 	tags = models.ManyToManyField('Tag') #문자열로 모델명을 넣어줘도 됨.
