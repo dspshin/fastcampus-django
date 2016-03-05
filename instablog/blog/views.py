@@ -4,6 +4,9 @@ from .forms import PostEditForm
 
 from django.core.paginator import Paginator
 from django.core.paginator import PageNotAnInteger, EmptyPage
+
+from django.contrib.auth.decorators import login_required
+
 def list(request):
 	per_page = 5
 	cur_page = request.GET.get('page',1)
@@ -27,7 +30,12 @@ def post(request, pk):
 
 from .models import Category
 from django.shortcuts import redirect
+
+@login_required
 def create(request):
+	#if not request.user.is_authenticated():
+	#	raise Exception('who are you???')
+
 	if request.method == 'GET':
 		form = PostEditForm()
 	elif request.method == 'POST':

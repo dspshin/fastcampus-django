@@ -15,6 +15,8 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
+from django.contrib.auth.views import login, logout
+from django.conf import settings
 
 from blog.views import list,post,create
 urlpatterns = [
@@ -22,4 +24,10 @@ urlpatterns = [
 	url(r'^post/(?P<pk>\d+)/$', post, name='view_post'),
 	url(r'^create$', create),
     url(r'^admin/', admin.site.urls),
+    url(r'^login/$', login, {
+        'template_name' : 'login.html'
+    }, name='login_url'),
+    url(r'^logout/$', logout, {
+        'next_page' : settings.LOGIN_URL
+    }, name='logout_url'),
 ]
