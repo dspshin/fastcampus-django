@@ -20,7 +20,7 @@ from django.conf import settings
 
 from blog.views import list,post,create
 urlpatterns = [
-	url(r'^list$', list),
+	url(r'^list/$', list),
 	url(r'^post/(?P<pk>\d+)/$', post, name='view_post'),
 	url(r'^create$', create),
     url(r'^admin/', admin.site.urls),
