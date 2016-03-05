@@ -37,7 +37,7 @@ deactivate () {
 # unset irrelavent variables
 deactivate nondestructive
 
-VIRTUAL_ENV="/Users/dsp/Desktop/fastcampus/helloworld/hwenv"
+VIRTUAL_ENV="/Users/dsp/Desktop/fastcampus/fastcampus-django/hwenv"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"

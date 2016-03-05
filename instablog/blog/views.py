@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404
 from .models import Post
+from .forms import PostForm
 
 from django.core.paginator import Paginator
 from django.core.paginator import PageNotAnInteger, EmptyPage
@@ -28,20 +29,21 @@ from .models import Category
 from django.shortcuts import redirect
 def create(request):
 	if request.method == 'GET':
-		pass
+		form = PostForm()
 	elif request.method == 'POST':
-		new_post = Post()
-		new_post.title = request.POST.get('title')
-		new_post.content = request.POST.get('content')
-		category_pk = request.POST.get('category')
-		try:
-			new_post.category = Category.objects.get(pk=category_pk)
-		except: #category가 없는 경우에 대한 예외처리 해야함.
-			pass
-		new_post.save()
-		return redirect('view_post', pk=new_post.pk)
+		form = PostForm(request.POST)
+		if form.is_valid():
+		  	new_post = Post()
+		  	new_post.title = form.cleaned_data.get('title')
+		  	new_post.content = form.cleaned_data['content']
+		  	category_pk = request.POST.get('category')
+		  	category = get_object_or_404(Category, pk=category_pk)
+		  	new_post.category = category
+		  	new_post.save()
+		  	return redirect('view_post', pk=new_post.pk)
 
 	categories = Category.objects.all()
 	return render(request, 'create.html', {
-		'categories':categories
+		'categories':categories,
+		'form':form
 	})

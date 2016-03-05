@@ -12,13 +12,7 @@
 					{% endfor %}
 				</select>
 			</p>
-			<p>
-				<label for="title">title</label>
-				<input type="text" name="title" id="title"/>
-			</p>
-			<p>
-				<textarea name="content"></textarea>
-			</p>
+			{{ form.as_p }}
 			<p>
 				{% bootstrap_button "Save" button_type="submit" button_class="btn-primary" %}
 			</p>
